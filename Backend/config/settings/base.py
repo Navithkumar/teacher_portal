@@ -19,6 +19,7 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'core',
     'apps.users',
+    'apps.students'
 ]
 
 MIDDLEWARE = [

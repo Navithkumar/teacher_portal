@@ -1,0 +1,32 @@
+body {
+    background-color: #eaeaea !important;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.logo-text {
+    font-weight: 600;
+    font-size: 32px;
+    color: #d52b2b;
+    text-align: center;
+}
+
+.login-box {
+    width: 100%;
+    max-width: 400px;
+    background-color: white;
+    border-radius: 8px;
+}
+
+.input-group-text {
+    background-color: #f8f9fa;
+}
+
+input::placeholder {
+    color: #aaa;
+}
+.logo {
+    width: 150px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}

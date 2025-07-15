@@ -1,0 +1,39 @@
+.table-container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.custom-table {
+    background-color: white;
+    border-collapse: separate;
+    border-spacing: 0 8px;
+}
+
+.custom-table th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+    color: #444;
+}
+
+.custom-table td {
+    background-color: white;
+    vertical-align: middle;
+}
+
+.avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: #007bff;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+}
+
+.action-btn {
+    background: none;
+    border: none;
+    font-size: 18px;
+}
