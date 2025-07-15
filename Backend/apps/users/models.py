@@ -1,20 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 
-
-class Address(models.Model):
-    street = models.CharField(max_length=255)
-    city = models.CharField(max_length=100)
-    state = models.CharField(max_length=100)
-    postal_code = models.CharField(max_length=20)
-    country = models.CharField(max_length=100)
-
-    def __str__(self):
-        return f"{self.street}, {self.city}"
-
-
 class UserManager(BaseUserManager):
-    def create_user(self, username, email, phone_number, role=2, address=None, password=None, status=1):
+    def create_user(self, username, email, phone_number, role=1, password=None, status=1):
         if not email:
             raise ValueError("Users must have an email address")
 
@@ -26,7 +14,6 @@ class UserManager(BaseUserManager):
             phone_number=phone_number,
             role=role,
             status=status,
-            address=address
         )
         user.set_password(password)
         user.save(using=self._db)
@@ -49,14 +36,11 @@ class UserManager(BaseUserManager):
 
 class User(AbstractBaseUser, PermissionsMixin):
     class Role(models.IntegerChoices):
-        ADMIN = 1, 'Admin'
-        CUSTOMER = 2, 'Customer'
-        SELLER = 3, 'Seller'
+        TEACHER = 1, 'teacher'
 
     username = models.CharField(max_length=100, unique=True)
     email = models.EmailField(unique=True)
     phone_number = models.CharField(max_length=15, unique=True)
-    address = models.ForeignKey(Address, null=True, blank=True, on_delete=models.SET_NULL)
     status = models.IntegerField(default=1)
     role = models.IntegerField(choices=Role.choices)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -64,22 +48,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     
     objects = UserManager()
 
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['username', 'phone_number']
+    USERNAME_FIELD = 'username'
+    REQUIRED_FIELDS = ['phone_number']
 
     def __str__(self):
         return self.email
-
-class Slidebar(models.Model):
-    class status(models.IntegerChoices):
-        ACTIVE = 1, 'active'
-        INACTIVE = 2, 'inactive'
-
-    slidebar_name = models.CharField(max_length=255)
-    status = models.IntegerField(choices=status.choices)
-    icons = models.CharField(max_length=255)
-    role = models.TextField()
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-    def __str__(self):
-        return f"{self.slidebar_name}"
