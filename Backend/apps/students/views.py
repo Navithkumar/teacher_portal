@@ -6,6 +6,7 @@ from .models import Student
 from .serializers import StudentSerializer
 from core.pagination import MyCustomPagination
 from rest_framework.permissions import IsAuthenticated
+from django.shortcuts import get_object_or_404
 
 class StudentCreateView(APIView):
     permission_classes = [IsAuthenticated]
@@ -50,3 +51,35 @@ class StudentListView(APIView):
 
         except Exception as e:
               return error_response("Error while fetch student", str(e), status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        
+
+class StudentEditView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def patch(self, request, id):
+        try:
+            with transaction.atomic():
+                student = get_object_or_404(Student, id=id)
+                
+                serializer = StudentSerializer(student, data=request.data, partial=True)
+                if serializer.is_valid():
+                    serializer.save()
+                    return success_response("Student updated successfully", serializer.data, status=status.HTTP_200_OK)
+                else:
+                    return error_response("Validation failed", serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+        except Exception as e:
+            return error_response("Error while updating student", str(e), status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+class StudentDeleteView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def delete(self, request, id):
+        try:
+            with transaction.atomic():
+                student = get_object_or_404(Student, id=id)
+                student.delete()
+                return success_response("Student deleted successfully", status=status.HTTP_200_OK)
+
+        except Exception as e:
+            return error_response("Error while deleting student", str(e), status=status.HTTP_500_INTERNAL_SERVER_ERROR)

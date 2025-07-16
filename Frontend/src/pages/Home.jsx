@@ -25,9 +25,7 @@ function Home() {
         };
         fetchData();
     }, [navigate]);
-    const handleAction = (row) => {
-        alert(`Clicked on ${row.name}`);
-    };
+
     return (
         <>
             <div>
@@ -37,7 +35,7 @@ function Home() {
                 <TableComponent
                     headers={headers}
                     data={userData}
-                    onAction={handleAction}
+                    setData={setUserData}
                 />
                 ;
             </div>
