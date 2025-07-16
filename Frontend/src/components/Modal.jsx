@@ -43,7 +43,6 @@ const StudentModal = ({ show, handleClose, onSubmit, initialData = {} }) => {
         <Modal show={show} onHide={handleClose} centered backdrop="static">
             <Modal.Body className="p-4">
                 <h5 className="mb-4">
-                    {console.log(formData.id)}
                     {formData.id ? 'Edit Student' : 'Add Student'}
                 </h5>
 

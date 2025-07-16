@@ -49,4 +49,6 @@ npm install bootstrap react-bootstrap react-icons
 
 npm run dev
 
+# pls refer postman collections
+
 # thankyou
