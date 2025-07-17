@@ -51,4 +51,13 @@ npm run dev
 
 # pls refer postman collections
 
+# And hit the regiter api to create new user because django dont create record automatically and cant hardcode (pls use below payload)
+
+{
+"username": "teacher",
+"password": "teacher@123",
+"email": "teacher@gmail.com",
+"phone_number":9013594612
+}
+
 # thankyou
