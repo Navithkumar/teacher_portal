@@ -23,7 +23,7 @@ class StudentCreateView(APIView):
                 existing_student = Student.objects.filter(name=name, subject_name=subject).first()
 
                 if existing_student:
-                    existing_student.marks = int(mark)
+                    existing_student.marks += int(mark)
                     existing_student.save()
                     serializer = StudentSerializer(existing_student)
                     return success_response("Student record updated", serializer.data, status=status.HTTP_200_OK)
